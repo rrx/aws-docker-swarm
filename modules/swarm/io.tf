@@ -27,6 +27,7 @@ variable "user-data-vars" {
 
 variable "role" {}
 variable "discovery-bucket" {}
+variable "spot" { default="" }
 
 // Tags
 variable "name" {

@@ -16,7 +16,7 @@ module "swarm" {
   security-group-ids = ["${ var.security-group-ids }", "${ aws_security_group.swarm.id }"]
   subnet-ids = ["${ var.subnet-ids }"]
   vpc-id = "${ var.vpc-id }"
-
+  spot = "${ var.spot }"  
   role = "manager"
   discovery-bucket = "${module.discovery-bucket.bucket}"
 }

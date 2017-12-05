@@ -41,12 +41,38 @@ variable "instance_type" {
     description = "The instance types launched into the cluster"
 }
 
+variable "instance_type_spot" {
+    description = "The instance type for SPOT instances launched into the cluster"
+}
+
+variable "manager_spot_price" {
+    description = "Spot price maximum for manager spot instances"
+    default = ""
+}
+
+variable "worker_spot_price" {
+    description = "Spot price maximum for worker spot instances"
+    default = ""
+}
+
 variable "swarm_manager_count" {
     description = "The number of instances to run as swarm managers"
+    default = 0
 }
 
 variable "swarm_worker_count" {
     description = "The number of instances to run as swarm workers"
+    default = 0
+}
+
+variable "swarm_manager_spot_count" {
+    description = "The number of instances to run as swarm managers"
+    default = 0
+}
+
+variable "swarm_worker_spot_count" {
+    description = "The number of instances to run as swarm workers"
+    default = 0
 }
 
 variable "volume_size" {

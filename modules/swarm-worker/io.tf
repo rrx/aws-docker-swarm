@@ -19,7 +19,7 @@ variable "volume_size" {
   default = 52
 }
 
-variable "swarm-security-group-id" {}
+variable "swarm-security-group-ids" { type = "list" }
 variable "discovery-bucket" {}
 
 // Tags
@@ -33,6 +33,11 @@ variable "application" {
 
 variable "provisionersrc" {
   description = "Tag linking to the repository"
+}
+
+variable "spot" {
+  description = "Spot Price Max"
+  default = ""
 }
 
 // Outputs

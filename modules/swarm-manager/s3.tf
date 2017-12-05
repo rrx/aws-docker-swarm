@@ -3,8 +3,8 @@ module "discovery-bucket" {
 
   force_destroy = true
 
-  bucket = "${ lower(var.name) }-swarm-discovery-bucket"
-  name = "${ var.name }-swarm-discovery-bucket"
+  bucket = "${ lower(var.application) }-swarm-discovery-bucket"
+  name = "${ var.application }-swarm-discovery-bucket"
   application = "${ var.application }"
   provisionersrc = "${ var.provisionersrc }"
 }

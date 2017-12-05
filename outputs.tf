@@ -1,3 +1,6 @@
+output "bucket" {
+  value = "${ module.manager.discovery-bucket }"
+}
 output "manager-autoscaling-group-name" {
   value = "${ module.manager.autoscaling-group-name }"
 }

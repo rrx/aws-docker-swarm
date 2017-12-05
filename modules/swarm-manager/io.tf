@@ -31,6 +31,11 @@ variable "provisionersrc" {
   description = "Tag linking to the repository"
 }
 
+variable "spot" {
+  description = "Spot Price Max"
+  default = ""
+}
+
 // Outputs
 output "autoscaling-group-name" { value = "${ module.swarm.autoscaling-group-name }" }
 output "discovery-bucket" { value = "${ module.discovery-bucket.bucket }" }

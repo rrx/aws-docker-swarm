@@ -45,6 +45,24 @@ module "manager" {
   vpc-id = "${ module.vpc.id }"
 }
 
+module "manager-spot" {
+  source = "./modules/swarm-manager"
+
+  name = "${ var.application }-swarm-manager-spot"
+  application = "${ var.application }"
+  provisionersrc = "${ var.provisionersrc }"
+
+  ami-id = "${ module.ami.image_id }"
+  key-name = "${ var.key_name }"
+  size = "${var.swarm_manager_spot_count}"
+  volume_size = "${var.volume_size}"
+  instance-type = "${ var.instance_type_spot }"
+  security-group-ids = ["${ aws_security_group.app.id }"]
+  subnet-ids = ["${ module.vpc.subnet-ids-public }"]
+  vpc-id = "${ module.vpc.id }"
+  spot = "${ var.manager_spot_price }"
+}
+
 module "worker" {
   source = "./modules/swarm-worker"
 
@@ -61,7 +79,28 @@ module "worker" {
   subnet-ids = ["${ module.vpc.subnet-ids-public }"]
   vpc-id = "${ module.vpc.id }"
 
-  swarm-security-group-id = "${ module.manager.swarm-security-group-id }"
+  swarm-security-group-ids = ["${ module.manager.swarm-security-group-id }", "${ module.manager-spot.swarm-security-group-id }"]
+  discovery-bucket = "${ module.manager.discovery-bucket }"
+}
+
+module "worker-spot" {
+  source = "./modules/swarm-worker"
+
+  name = "${ var.application }-swarm-worker-spot"
+  application = "${ var.application }"
+  provisionersrc = "${ var.provisionersrc }"
+
+  ami-id = "${ module.ami.image_id }"
+  key-name = "${ var.key_name }"
+  size = "${var.swarm_worker_spot_count}"
+  volume_size = "${var.volume_size}"
+  instance-type = "${ var.instance_type_spot }"
+  security-group-ids = ["${ aws_security_group.app.id }"]
+  subnet-ids = ["${ module.vpc.subnet-ids-public }"]
+  vpc-id = "${ module.vpc.id }"
+  spot = "${ var.worker_spot_price }"
+
+  swarm-security-group-ids = ["${ module.manager.swarm-security-group-id }", "${ module.manager-spot.swarm-security-group-id }"]
   discovery-bucket = "${ module.manager.discovery-bucket }"
 }
 

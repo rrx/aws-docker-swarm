@@ -70,6 +70,7 @@ resource "aws_launch_configuration" "asg" {
   image_id = "${ var.ami-id }"
   instance_type = "${ var.instance-type }"
   key_name = "${ var.key-name }"
+  spot_price = "${ var.spot }"
 
   # Storage
   root_block_device {

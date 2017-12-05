@@ -13,10 +13,10 @@ module "swarm" {
   size = "${var.size}"
   volume_size = "${var.volume_size}"
   instance-type = "${ var.instance-type }"
-  security-group-ids = ["${ var.security-group-ids }", "${ var.swarm-security-group-id }"]
+  security-group-ids = ["${ var.security-group-ids }", "${ var.swarm-security-group-ids }"]
   subnet-ids = ["${ var.subnet-ids }"]
   vpc-id = "${ var.vpc-id }"
-
+  spot = "${ var.spot }"
   role = "worker"
   discovery-bucket = "${var.discovery-bucket}"
 }
